@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Ingredientes{% endblock %}
+{% block content %}
+<h1 class="mb-4">Lista de Ingredientes</h1>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Nombre</th><th>Stock</th><th>Proveedor</th><th>Acciones</th></tr>
+  </thead>
+  <tbody>
+    {% for ing in ingredientes %}
+    <tr>
+      <td>{{ ing.nombre }}</td>
+      <td>
+        {{ ing.stock_actual }}
+        {% if ing.stock_actual < ing.stock_minimo %}
+          <span class="badge bg-warning text-dark">Bajo</span>
+        {% endif %}
+      </td>
+      <td>{{ ing.proveedor_principal }}</td>
+      <td>
+        <a href="{{ url_for('ingredientes.editar', id=ing.ingrediente_id) }}" class="btn btn-sm btn-success">Editar</a>
+        <form method="POST" action="{{ url_for('ingredientes.eliminar', id=ing.ingrediente_id) }}" style="display:inline-block;">
+          <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?');">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

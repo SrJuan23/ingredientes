@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Nuevo Ingrediente</h2>
+<form method="POST" action="{{ url_for('ingredientes.guardar') }}">
+  <!-- campos del formulario… -->
+  <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+</form>
+{% endblock %}
